@@ -1,0 +1,27 @@
+﻿@model List<Category> //- Indica que la vista recibe una lista de objetos Category como modelo.
+
+<h1>Categorias</h1>
+
+<table  class="table table-bordered table-striped"> <!-- creamos una tabla con estilo de bosstarp-->
+    <thead>
+        <tr>
+            <th>
+                Nombre de Categoria
+            </th>
+            <th>
+                Orden de Visualización
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+       @foreach (var item in Model.OrderBy(x=>x.DisplayOrder))
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.DisplayOrder</td>
+            </tr>
+            
+        }
+    </tbody>
+</table>

@@ -3,6 +3,7 @@ using EcommerceWebApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EcommerceWebApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251014052307_SeedCategoryTable")]
+    partial class SeedCategoryTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,30 +61,6 @@ namespace EcommerceWebApp.Migrations
                             Id = 3,
                             DisplayOrder = 3,
                             Name = "Historia"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            DisplayOrder = 4,
-                            Name = "Terror"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            DisplayOrder = 5,
-                            Name = "Romance"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            DisplayOrder = 6,
-                            Name = "Animación"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            DisplayOrder = 7,
-                            Name = "Comedia"
                         });
                 });
 #pragma warning restore 612, 618
