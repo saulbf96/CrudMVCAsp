@@ -1,27 +1,38 @@
 ﻿@model List<Category> //- Indica que la vista recibe una lista de objetos Category como modelo.
 
-<h1>Categorias</h1>
-
-<table  class="table table-bordered table-striped"> <!-- creamos una tabla con estilo de bosstarp-->
-    <thead>
-        <tr>
-            <th>
-                Nombre de Categoria
-            </th>
-            <th>
-                Orden de Visualización
-            </th>
-        </tr>
-    </thead>
-
-    <tbody>
-       @foreach (var item in Model.OrderBy(x=>x.DisplayOrder))
-        {
+<div class="container">
+  <div class="row pt-4 pb-3">
+      <div class="col-6">
+          <h2 class="text-primary"> Categoria</h2>
+      </div>
+      <div class="col-6 text-end">
+          <a asp-controller="Category" asp-action="Create" class="btn btn-primary"> <!-- aqui agregamos un botton para agregar una categoria-->
+                Agregar una categoria  <i class="bi bi-plus-circle-fill"></i> <!--icon de + -->
+          </a>
+      </div>
+  </div>
+    <table class="table table-bordered table-striped">
+        <!-- creamos una tabla con estilo de bosstarp-->   
+        <thead>
             <tr>
-                <td>@item.Name</td>
-                <td>@item.DisplayOrder</td>
+                <th>
+                    Nombre de Categoria
+                </th>
+                <th>
+                    Orden de Visualización
+                </th>
             </tr>
-            
-        }
-    </tbody>
-</table>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model.OrderBy(x => x.DisplayOrder))
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.DisplayOrder</td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+</div>

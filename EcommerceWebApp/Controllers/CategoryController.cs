@@ -26,5 +26,10 @@ namespace EcommerceWebApp.Controllers
             List<Category> objCategoryList = _db.Categories.ToList();
             return View(objCategoryList);//devuelve la vista correspondiente 
         }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
     }
 }
