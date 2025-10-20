@@ -1,22 +1,48 @@
 ﻿@model Category
 
+@if (TempData["success"] != null)
+{
+    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content bg-white border-secondary">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold text-dark" id="successModalLabel">Éxito</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <span class="fw-bold text-dark">@TempData["success"]</span>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-secondary fw-bold" id="modalCloseBtn">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
 <!-- este es un view de create IAresult del controler-->
 <form method="post">
     <div class="border p-3 mt-4">
-        <div class="row pb-2">
+        <div  class="row pb-2">
             <h2 class="text-primary">Crear Categoria</h2>
             <hr />
 
         </div>
+
+        <!-- Aqui ponemos todas las validaciones 
+
+        <div asp-validation-summary="All"></div>
+        -->
         <div class="mb-3 row p-1">
             <label asp-for="Name" class="p-0 " ></label>
             <input asp-for="Name" class="form-control" placeholder="Romance"/><!-- esto hace que aparesca el nobre tal cual del model
                                                           no es necesario poner tipo typ=" text " ya que aqui toma la del modelo
             -->
+            <span asp-validation-for="Name" class="text-danger"></span>
         </div>
         <div class="mb-3 row p-1">
             <label asp-for="DisplayOrder"  class="p-0"></label>
             <input asp-for="DisplayOrder" class="form-control" placeholder="23" />
+            <span asp-validation-for="DisplayOrder" class="text-danger"></span>
         </div>
         <div class="row">
             <div class="col-6 col-md-3">
@@ -32,3 +58,73 @@
         
     </div>
 </form>
+<!-- Scripts de validación de ASP.NET -->
+<partial name="_ValidationScriptsPartial" />
+<!-- Pasamos variables a JS -->
+<script>
+    window.existingNames = @Html.Raw(Json.Serialize(ViewBag.ExistingNames));
+    window.existingDisplays = @Html.Raw(Json.Serialize(ViewBag.ExistingDisplays));
+    window.indexUrl = '@Url.Action("Index", "Category")';
+</script>
+<!-- Incluimos JS externo -->
+<script src="~/js/CategoryValidation.js"></script>
+
+
+
+<!-- lo que hace este escrip es que cuando sea un error de validacion se quite el aviso sin refrescar la pagina 
+    todo esto lo movimos a un js externo para tener un codigo mas limpio 
+-->
+@*@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+    @if (TempData["success"] != null)
+    {
+        <script>
+            // Mostrar modal automáticamente
+            var successModal = new bootstrap.Modal(document.getElementById('successModal'));
+            successModal.show();
+
+            // Cuando el usuario haga clic en "Aceptar", redirige al Index
+            document.getElementById('modalCloseBtn').addEventListener('click', function() {
+                window.location.href = '@Url.Action("Index", "Category")';
+            });
+
+            // También permitir cerrar con la X
+            document.querySelector('#successModal .btn-close').addEventListener('click', function() {
+                window.location.href = '@Url.Action("Index", "Category")';
+            });
+        </script>
+
+       
+    }
+    @* Validacion dinamica cuando el usuario le mande error de un nombre o display existente 
+            al corregir el dato desaparesca ese mensaje esto hace referencia despues  la validacion de si existe
+            datos iguales en el razor create 
+        *@
+        @*
+    <script>
+
+        const existingNames = @Html.Raw(Json.Serialize(ViewBag.ExistingNames));
+            const existingDisplays = @Html.Raw(Json.Serialize(ViewBag.ExistingDisplays));
+
+        const nameInput = document.getElementById('NameInput');
+        const displayInput = document.getElementById('DisplayInput');
+        const nameError = document.getElementById('NameError');
+        const displayError = document.getElementById('DisplayError');
+
+        nameInput.addEventListener('input', function() {
+            if (existingNames.includes(nameInput.value.toLowerCase())) {
+                nameError.textContent = `Ya existe una categoría con el nombre '${nameInput.value}'`;
+            } else {
+                nameError.textContent = '';
+            }
+        });
+
+        displayInput.addEventListener('input', function() {
+            if (existingDisplays.includes(parseInt(displayInput.value))) {
+                displayError.textContent = `Ya existe una categoría con el Orden de visualización '${displayInput.value}'`;
+            } else {
+                displayError.textContent = '';
+            }
+        });
+
+    </script> *@
