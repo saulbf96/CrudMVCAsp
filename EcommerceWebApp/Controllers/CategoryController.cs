@@ -31,5 +31,10 @@ namespace EcommerceWebApp.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public IActionResult Create (Category category)
+        {
+            return View();
+        }
     }
 }

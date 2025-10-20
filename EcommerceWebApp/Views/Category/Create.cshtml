@@ -9,12 +9,14 @@
 
         </div>
         <div class="mb-3 row p-1">
-            <label class="p-0 ">Nombre de la categoria</label>
-            <input  type="text" class="form-control"/>
+            <label asp-for="Name" class="p-0 " ></label>
+            <input asp-for="Name" class="form-control" placeholder="Romance"/><!-- esto hace que aparesca el nobre tal cual del model
+                                                          no es necesario poner tipo typ=" text " ya que aqui toma la del modelo
+            -->
         </div>
         <div class="mb-3 row p-1">
-            <label class="p-0">Orden de visualización</label>
-            <input type="text" class="form-control" />
+            <label asp-for="DisplayOrder"  class="p-0"></label>
+            <input asp-for="DisplayOrder" class="form-control" placeholder="23" />
         </div>
         <div class="row">
             <div class="col-6 col-md-3">
