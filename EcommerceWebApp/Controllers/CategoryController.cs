@@ -209,6 +209,55 @@ namespace EcommerceWebApp.Controllers
             return View(categoryFromDb);
         }
 
+        //eliminar------------
+
+        public IActionResult Delete(int? id)//devuelve una vista para editar categoria 
+                                          //recibe de parametro un Id que ala vez puede ser null , int? ya que el usuario podria no enviar ningun valor en la URL
+        {
+
+
+            if (id == null || id == 0)
+            {
+                //si no llega un Id o es 0 devuelve un 404 NotFound
+                //esto evita errores si alguien accede en /Category/Edit/ con un id invalido 
+                return NotFound();
+            }
+            Category? categoryFromDb = _db.Categories.Find(id);//busca categoria por su clave primaria 
+            //Category? categoryFromBd1 = _db.Categories.FirstOrDefault(x => x.Id == id);//busca categoria que cumpla con la condicion o devuelve null
+            //Category? categoryFromBd2 = _db.Categories.Where(u => u.Id == id).FirstOrDefault();//filtra categoria por id == id y toma la primera  o null
+
+            //TempData["success"] = $"La categoría '{categoryFromDb.Name}' se ha eliminado correctamente.";
+
+            //// 🔹 Paso 7: Actualizamos ViewBag para validaciones dinámicas en la vista
+            //ViewBag.ExistingNames = _db.Categories.Select(c => c.Name.ToLower()).ToList();
+            //ViewBag.ExistingDisplays = _db.Categories.Select(c => c.DisplayOrder).ToList();
+
+            if (categoryFromDb == null)// si no se necuentra ninguna categoria con ese id regresa 404 
+            {
+                return NotFound();
+            }
+
+            return View(categoryFromDb);// si encontro categoria envia los datos  ala vista edit donde el usuario podra ver los campos y modificarlos
+        }
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeletePOST(int? id)
+        {
+            Category? category = _db.Categories.Find(id);
+            if (category == null)
+            {
+                // Si no existe, lo mandamos al Index con mensaje de error opcional
+                TempData["error"] = "La categoría que intentaste eliminar no existe.";
+                return RedirectToAction("Index");
+            }
+
+            _db.Categories.Remove(category);
+           _db.SaveChanges();
+
+            ViewBag.SuccessMessage = "Categoría eliminada correctamente. Redirigiendo a la lista...";
+
+             return RedirectToAction("Index");
+        }
 
 
     }

@@ -24,6 +24,7 @@
 <!-- Modal de confirmación al regresar -->
 <!-- este es un view de create IAresult del controler-->
 <form method="post">
+    @* <input asp-for="Id" hidden /> *@
     <div class="border p-3 mt-4">
         <div class="row pb-2">
             <h2 class="text-primary">Editar categoria</h2>
@@ -71,4 +72,4 @@
     window.indexUrl = '@Url.Action("Index", "Category")';
 </script>
 <!-- Incluimos JS externo -->
-<script src="~/js/CategoryValidation.js"></script>
+<script src="~/js/CategoryEdit.js"></script>
