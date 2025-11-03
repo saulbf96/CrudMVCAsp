@@ -18,7 +18,7 @@ namespace EcommerceWebApp.Models
         [Required(ErrorMessage = "El orden de visualización es obligatorio.")]
         [Range(1,50, ErrorMessage ="El valor esta fuera del rango, debe de estar entre 1 y 50.") ]//si el rango es menor o mayor 
         [RegularExpression(@"^\d+$", ErrorMessage = "El orden de visualización solo puede contener números")]//no acepta caracteres alfanumericos
-        public int? DisplayOrder { get; set; } //mostrar el orden en que se muestran categoria
+        public int DisplayOrder { get; set; } //mostrar el orden en que se muestran categoria
 
 
     }

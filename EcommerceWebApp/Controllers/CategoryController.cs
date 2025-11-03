@@ -176,7 +176,7 @@ namespace EcommerceWebApp.Controllers
 
                     // 🔹 Paso 4.3: Insertamos la categoría en la nueva posición
                     // Por ejemplo, si el usuario pone DisplayOrder = 3, la ponemos en índice 2 (porque los índices empiezan en 0)
-                    int newIndex = category.DisplayOrder.Value - 1;
+                    int newIndex = category.DisplayOrder - 1;
                     if (newIndex < 0) newIndex = 0; // por si el usuario pone un número muy chico
                     if (newIndex > allCategories.Count) newIndex = allCategories.Count; // por si pone un número muy grande
                     allCategories.Insert(newIndex, categoryFromDb);
