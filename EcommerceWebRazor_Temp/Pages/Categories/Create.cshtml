@@ -1,0 +1,86 @@
+﻿@page
+@model EcommerceWebRazor_Temp.Pages.Categories.CreateModel
+
+
+@if (TempData["success"] != null)
+{
+    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content bg-white border-secondary">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold text-dark" id="successModalLabel">Éxito</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <span class="fw-bold text-dark">@TempData["success"]</span>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-secondary fw-bold" id="modalCloseBtn">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<!-- este es el de si quiero regersar ala lista de categorias si el usuario ya escribio algo en los campos -->
+<!-- Modal de confirmación al regresar -->
+<!-- este es un view de create IAresult del controler-->
+<form method="post">
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">Crear Categoria</h2>
+            <hr />
+
+        </div>
+
+        <!-- Aqui ponemos todas las validaciones
+
+        <div asp-validation-summary="All"></div>
+        -->
+        <div class="mb-3 row p-1">
+            <label asp-for="Category.Name" class="p-0 "></label>
+            <input asp-for="Category.Name"  class="form-control" placeholder="Romance" />
+            <!-- esto hace que aparesca el nobre tal cual del model
+                                                          no es necesario poner tipo typ=" text " ya que aqui toma la del modelo
+            -->
+            <span asp-validation-for="Category.Name" class="text-danger"></span>
+        </div>
+        <div class="mb-3 row p-1">
+            <label asp-for="Category.DisplayOrder" class="p-0"></label>
+            <input asp-for="Category.DisplayOrder" class="form-control" placeholder="23" />
+            <span asp-validation-for="Category.DisplayOrder" class="text-danger"></span>
+        </div>
+        <div class="row">
+            <div class="col-6 col-md-3">
+                <button type="submit" class="btn btn-primary form-control">Crear</button>
+            </div>
+            <div class="col-6 col-md-3">
+                <a asp-page="/categories/index" class="btn btn-secondary border form-control">
+                    Regresar a la lista
+                </a>
+            </div>
+        </div>
+
+
+    </div>
+</form>
+<!-- Scripts de validación de ASP.NET -->
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+        <script>
+            window.existingNames = @Html.Raw(Json.Serialize(ViewBag.ExistingNames));
+            window.existingDisplays = @Html.Raw(Json.Serialize(ViewBag.ExistingDisplays));
+            window.indexUrl = '@Url.Action("Index", "Category")';
+        </script>
+        <script src="~/js/CategoryValidation.js"></script>
+    }
+}
+<!-- Pasamos variables a JS -->
+@* <script>
+    window.existingNames = @Html.Raw(Json.Serialize(ViewBag.ExistingNames));
+    window.existingDisplays = @Html.Raw(Json.Serialize(ViewBag.ExistingDisplays));
+    window.indexUrl = '@Url.Action("Index", "Category")';
+</script>
+<!-- Incluimos JS externo -->
+<script src="~/js/CategoryValidation.js"></script> *@

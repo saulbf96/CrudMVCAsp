@@ -2,5 +2,52 @@
 @model EcommerceWebRazor_Temp.Pages.Categories.IndexModel
 
 <!-- agregamos el diseño de la categoria -->
+<div class="container">
+    <div class="row pt-4 pb-3">
+        <div class="col-6">
+            <h2 class="text-primary"> Categorias</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-page ="/categories/create"  class="btn btn-primary">
+                <!-- aqui agregamos un botton para agregar una categoria-->
+                Agregar una categoria  <i class="bi bi-plus-circle-fill"></i> <!--icon de + -->
+            </a>
+        </div>
+    </div>
+    <table class="table table-bordered table-striped">
+        <!-- creamos una tabla con estilo de bosstarp-->
+        <thead>
+            <tr>
+                <th>
+                    Nombre de Categoria
+                </th>
+                <th>
+                    Orden de Visualización
+                </th>
+                <th></th>
+            </tr>
+        </thead>
 
-<h1> Lista de categorias</h1>
+        <tbody>
+            @foreach (var item in Model.CategoryList.OrderBy(x => x.DisplayOrder))
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.DisplayOrder</td>
+                    <td>
+                        <!--   este es el listado de categoria y se agrega su boton de editar -->
+                        <div class="w-75 btn-group" role="group">
+                            <a asp-page="/categories/edit"  asp-route-id="@item.Id" class="btn btn-primary mx-2">
+                                <i class="bi bi-pencil-square"></i> Editar
+                            </a>
+                            <a asp-page="/categories/delete" asp-route-id="@item.Id" class="btn btn-danger mx-2">
+                                <i class="bi bi-trash3"></i> Eliminar
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+</div>
