@@ -1,0 +1,79 @@
+﻿@page
+@model EcommerceWebRazor_Temp.Pages.Categories.DeleteModel
+
+<!-- Modal de confirmación -->
+@if (Model != null)
+{
+    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content bg-white border-secondary">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold text-dark" id="confirmDeleteModalLabel">Confirmar eliminación</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <p class="fw-bold text-dark">
+                        ¿Estás seguro de eliminar la categoría <span class="text-danger">Nombre: @Model.Category.Name</span>?
+                    </p>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-secondary fw-bold" data-bs-dismiss="modal">No</button>
+                    <button type="button" id="confirmDeleteBtn" class="btn btn-danger fw-bold">Sí, eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <!-- Si Model es null mostramos un mensaje de error -->
+    <p class="text-danger fw-bold mt-3">Categoría no encontrada.</p>
+}
+
+<form method="post">
+    <input asp-for="Category.Id" hidden />
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">Eliminar categoría</h2>
+            <hr />
+        </div>
+
+        @if (Model != null)
+        {
+            <div class="mb-3 row p-1">
+                <label asp-for="Category.Name" class="p-0"></label>
+                <input asp-for="Category.Name" disabled class="form-control" />
+            </div>
+
+            <div class="mb-3 row p-1">
+                <label asp-for="Category.DisplayOrder" class="p-0"></label>
+                <input asp-for="Category.DisplayOrder" disabled class="form-control" />
+            </div>
+
+            <div class="row">
+                <div class="col-6 col-md-3">
+                    <!-- Botón que abre el modal -->
+                    <button type="button" class="btn btn-danger form-control" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">
+                        Eliminar
+                    </button>
+                </div>
+                <div class="col-6 col-md-3">
+                    <a asp-page="/categories/index" class="btn btn-secondary border form-control">
+                        Regresar a la lista
+                    </a>
+                </div>
+            </div>
+        }
+    </div>
+</form>
+@section Scripts {
+    @{
+        <!-- Scripts de validación ASP.NET -->
+        <partial name="_ValidationScriptsPartial" />
+
+        <!-- JS externo -->
+        <script src="~/js/CategoryDelete.js"></script>
+
+    }
+}
+

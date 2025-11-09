@@ -32,14 +32,14 @@
                 displayError.textContent = '';
             }
         });
-    }   
+    }
 
     // Modal de éxito, busca el modal success que esta en create chtml de category 
     const successModalEl = document.getElementById('successModal');
     if (successModalEl) {
         const successModal = new bootstrap.Modal(successModalEl);
         successModal.show();//si existe lo inicializa como un modal de bootstrap
-        
+
         // selecionamos los botonones de cerrar  la x o aceptar 
         const closeButtons = successModalEl.querySelectorAll('.btn-close, #modalCloseBtn');
         closeButtons.forEach(btn => {
@@ -49,7 +49,7 @@
         });
     }
 
- 
-    
+
+
 
 });

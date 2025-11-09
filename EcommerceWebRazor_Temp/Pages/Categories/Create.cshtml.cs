@@ -9,7 +9,7 @@ namespace EcommerceWebRazor_Temp.Pages.Categories
     {
 
         private readonly ApplicationDbContext _db;
-
+        [BindProperty]//aqui tomamos los datos del formulario y lo asiganmos a esta prop
         public Category Category { get; set; }
         public CreateModel(ApplicationDbContext db)
         {
@@ -17,6 +17,14 @@ namespace EcommerceWebRazor_Temp.Pages.Categories
         }
         public void OnGet()
         {
+        }
+
+        public IActionResult OnPost()
+        {
+            _db.Categories.Add(Category);
+            _db.SaveChanges();
+            TempData["success"] = "Categoria creada exitosamente";
+            return RedirectToPage("Index"); //despues de recibir los datos redirecionamos al index 
         }
     }
 }
