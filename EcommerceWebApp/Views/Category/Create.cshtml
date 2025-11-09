@@ -1,6 +1,60 @@
 ﻿@model Category
 
-@if (TempData["success"] != null)
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Crear Categoria</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form method="post">
+            <div class="border p-3">
+
+                <!-- Aqui ponemos todas las validaciones
+
+                <div asp-validation-summary="All"></div>
+                -->
+                <div class="form-floating py-2 col-12">
+                   @*  <input asp-for="Name" class="form-control" placeholder="Romance" />
+                    <label asp-for="Name" ></label> *@
+
+                    <input asp-for="Name" class="form-control border-0 shadow" placeholder="Romance" />
+                    <label asp-for="Name" class="ms-2"></label>
+                    
+                    
+                    <!-- esto hace que aparesca el nobre tal cual del model
+                                                                  no es necesario poner tipo typ=" text " ya que aqui toma la del modelo
+                    -->
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    @* <input asp-for="DisplayOrder" class="form-control" placeholder="23" />
+                    <label asp-for="DisplayOrder"></label> *@
+                    <input asp-for="DisplayOrder" class="form-control border-0 shadow" placeholder="23" />
+                    <label asp-for="DisplayOrder" class="ms-2"></label>
+                    
+                    <span asp-validation-for="DisplayOrder" class="text-danger"></span>
+                </div>
+                <div class="row pt-2">
+                    <div class="col-6 col-md-3">
+                        <button type="submit" class="btn btn-primary form-control">Crear</button>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a asp-controller="Category" asp-action="Index" class="btn btn-outline-primary border form-control">
+                            Regresar a la lista
+                        </a>
+                    </div>
+                </div>
+
+
+            </div>
+        </form>
+    </div>
+</div>
+
+@* @if (TempData["success"] != null)
 {
     <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-sm">
@@ -18,61 +72,24 @@
             </div>
         </div>
     </div>
-}
+} *@
 
 <!-- este es el de si quiero regersar ala lista de categorias si el usuario ya escribio algo en los campos -->
 <!-- Modal de confirmación al regresar -->
 
 
 <!-- este es un view de create IAresult del controler-->
-<form method="post">
-    <div class="border p-3 mt-4">
-        <div  class="row pb-2">
-            <h2 class="text-primary">Crear Categoria</h2>
-            <hr />
 
-        </div>
-
-        <!-- Aqui ponemos todas las validaciones 
-
-        <div asp-validation-summary="All"></div>
-        -->
-        <div class="mb-3 row p-1">
-            <label asp-for="Name" class="p-0 " ></label>
-            <input asp-for="Name" class="form-control" placeholder="Romance"/><!-- esto hace que aparesca el nobre tal cual del model
-                                                          no es necesario poner tipo typ=" text " ya que aqui toma la del modelo
-            -->
-            <span asp-validation-for="Name" class="text-danger"></span>
-        </div>
-        <div class="mb-3 row p-1">
-            <label asp-for="DisplayOrder"  class="p-0"></label>
-            <input asp-for="DisplayOrder" class="form-control" placeholder="23" />
-            <span asp-validation-for="DisplayOrder" class="text-danger"></span>
-        </div>
-        <div class="row">
-            <div class="col-6 col-md-3">
-                <button type="submit" class="btn btn-primary form-control">Crear</button>
-            </div>
-            <div class="col-6 col-md-3">
-                <a asp-controller="Category" asp-action="Index" class="btn btn-secondary border form-control">
-                    Regresar a la lista
-                </a>
-            </div>
-        </div>
-       
-        
-    </div>
-</form>
 <!-- Scripts de validación de ASP.NET -->
 <partial name="_ValidationScriptsPartial" />
 <!-- Pasamos variables a JS -->
-<script>
+@* <script>
     window.existingNames = @Html.Raw(Json.Serialize(ViewBag.ExistingNames));
     window.existingDisplays = @Html.Raw(Json.Serialize(ViewBag.ExistingDisplays));
     window.indexUrl = '@Url.Action("Index", "Category")';
 </script>
 <!-- Incluimos JS externo -->
-<script src="~/js/CategoryValidation.js"></script>
+<script src="~/js/CategoryValidation.js"></script> *@
 
 
 
