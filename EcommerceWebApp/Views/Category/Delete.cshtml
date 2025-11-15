@@ -1,71 +1,68 @@
 ﻿@model Category
 
-
-<!-- Modal de confirmación -->
-@if (Model != null)
-{
-    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-sm">
-            <div class="modal-content bg-white border-secondary">
-                <div class="modal-header">
-                    <h5 class="modal-title fw-bold text-dark" id="confirmDeleteModalLabel">Confirmar eliminación</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-                </div>
-                <div class="modal-body text-center">
-                    <p class="fw-bold text-dark">
-                        ¿Estás seguro de eliminar la categoría <span class="text-danger">Nombre: @Model.Name</span>?
-                    </p>
-                </div>
-                <div class="modal-footer justify-content-center">
-                    <button type="button" class="btn btn-secondary fw-bold" data-bs-dismiss="modal">No</button>
-                    <button type="button" id="confirmDeleteBtn" class="btn btn-danger fw-bold">Sí, eliminar</button>
-                </div>
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Eliminar Categoria</h2>
             </div>
         </div>
     </div>
-}
-else
-{
-    <!-- Si Model es null mostramos un mensaje de error -->
-    <p class="text-danger fw-bold mt-3">Categoría no encontrada.</p>
-}
+    <div class="card-body p-4">
+        <form method="post">
+            <input asp-for="Id" hidden />
+            <div class="border p-3 mt-4">
+               
 
-<form method="post">
-    <input asp-for="Id" hidden />
-    <div class="border p-3 mt-4">
-        <div class="row pb-2">
-            <h2 class="text-primary">Eliminar categoría</h2>
-            <hr />
-        </div>
+                @if (Model != null)
+                {
+                    <div class="form-floating py-2 col-12">
+                        @*  <input asp-for="Name" class="form-control" placeholder="Romance" />
+                    <label asp-for="Name" ></label> *@
 
-        @if (Model != null)
-        {
-            <div class="mb-3 row p-1">
-                <label asp-for="Name" class="p-0"></label>
-                <input asp-for="Name" disabled class="form-control" />
+                        <input asp-for="Name" disabled class="form-control border-0 shadow" placeholder="Romance" />
+                        <label asp-for="Name" class="ms-2"></label>
+
+
+                        <!-- esto hace que aparesca el nobre tal cual del model
+                                                                      no es necesario poner tipo typ=" text " ya que aqui toma la del modelo
+                        -->
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-floating py-2 col-12">
+                        @*  <input asp-for="Name" class="form-control" placeholder="Romance" />
+                    <label asp-for="Name" ></label> *@
+
+                        <input asp-for="DisplayOrder" disabled class="form-control border-0 shadow" placeholder="Romance" />
+                        <label asp-for="DisplayOrder" class="ms-2"></label>
+
+
+                        <!-- esto hace que aparesca el nobre tal cual del model
+                                                                      no es necesario poner tipo typ=" text " ya que aqui toma la del modelo
+                        -->
+                        <span asp-validation-for="DisplayOrder" class="text-danger"></span>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-6 col-md-3">
+                            <!-- Botón que abre el modal -->
+                            <button type="button" class="btn btn-danger form-control" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">
+                                Eliminar
+                            </button>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <a asp-controller="Category" asp-action="Index" class="btn btn-secondary border form-control">
+                                Regresar a la lista
+                            </a>
+                        </div>
+                    </div>
+                }
             </div>
-
-            <div class="mb-3 row p-1">
-                <label asp-for="DisplayOrder" class="p-0"></label>
-                <input asp-for="DisplayOrder" disabled class="form-control" />
-            </div>
-
-            <div class="row">
-                <div class="col-6 col-md-3">
-                    <!-- Botón que abre el modal -->
-                    <button type="button" class="btn btn-danger form-control" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">
-                        Eliminar
-                    </button>
-                </div>
-                <div class="col-6 col-md-3">
-                    <a asp-controller="Category" asp-action="Index" class="btn btn-secondary border form-control">
-                        Regresar a la lista
-                    </a>
-                </div>
-            </div>
-        }
+        </form>
     </div>
-</form>
+</div>
+
 
 <!-- Scripts de validación ASP.NET -->
 <partial name="_ValidationScriptsPartial" />

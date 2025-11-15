@@ -1,4 +1,6 @@
-﻿using EcommerceWebApp.Models;
+﻿
+
+using EcommerceWebApp.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace EcommerceWebApp.Data
