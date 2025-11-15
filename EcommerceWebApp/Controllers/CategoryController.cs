@@ -1,6 +1,7 @@
 ﻿
-using EcommerceWebApp.Data;
-using EcommerceWebApp.Models;
+
+using Ecommerce.Models;
+using EcommerceWebApp.DataAccess.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
